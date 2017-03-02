@@ -4,12 +4,13 @@
 
 #ifndef HW1_BIGNUM_H
 #define HW1_BIGNUM_H
-#include <memory>
 
 // Written by Prof. Ari Trachtenberg for EC330
 #include <iostream>
 #include <vector>
 #include <string>
+#include <memory>
+
 using namespace std;
 
 /**
