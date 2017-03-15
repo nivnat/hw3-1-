@@ -76,7 +76,7 @@ public:
     bigNum& operator*=(const bigNum& multiplicand);
     bigNum& operator/=(const bigNum& divisor);
 
-protected:
+//protected:
     vector<int> digits; /** stores the digits of the current number */
 
 private:
