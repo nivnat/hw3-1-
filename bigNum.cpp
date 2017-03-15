@@ -17,6 +17,7 @@ bigNum::bigNum(string num) {
             digits.insert(digits.begin(), num[ii] - '0');
         }
 }
+//YOLO
 
 bigNum::bigNum(unsigned int num) {
     stringstream ss; ss<<num;
