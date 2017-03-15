@@ -38,7 +38,7 @@ void bigNumSort::performSort()
                 bucket[0]++; //eg: 
             else
             {
-                bucket[data[ii].digits[dig]]++;
+                bucket[data[ii].numDigits()]++;
             }
         }
 
@@ -54,7 +54,7 @@ void bigNumSort::performSort()
                 final[--bucket[0]]=data[j];
             else
             {
-                final[--bucket[data[j].digits[dig]]]=data[j];
+                final[--bucket[data[j].numDigits()]=data[j]];
 
             }
         }
