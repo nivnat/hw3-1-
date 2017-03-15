@@ -5,7 +5,6 @@
 
 #include "genericSort.h"
 #include "bigNumSort.h"
-
 void bigNumSort::performSort() 
 {
     // A simple implementation of bubble sort
@@ -23,34 +22,47 @@ void bigNumSort::performSort()
             }
     */
     int bucket[10];
+   
+    //cout<<"yes";
+    int dig=0, max=0;
+    
+    for(int i=0;i<data.size();i++)
+    {
+        dig=data[i].digits.size();
+        if(max<dig)
+        {
+            max=dig;
+        }
+    } 
+    //bigNum final[data.size()]; 
     vector<bigNum>final(data.size());
-    int dig=0;
-
-    while(true)
+    for(dig=0;dig<max;dig++)
     {
 
         for(int i=0;i<10;i++)
-            bucket[i]=0;
-
+        {
+                bucket[i]=0;
+        }
         for(int ii=0;ii<data.size();ii++)
         {
-            if(data[ii].numDigits()<dig)
+            if(data[ii].numDigits()<dig+1)
+            {
+                //cout<<data[ii].numDigits();
+               // cout<<dig;
                 bucket[0]++; //eg: 
+            }
             else
             {
                 bucket[data[ii].digits[dig]]++;
             }
         }
-
-        if(bucket[0]==data.size())
-            break;
-
+                
         for (int ii=1; ii<10; ii++)
             bucket[ii] += bucket[ii-1];
 
         for(int j=data.size()-1;j>=0;j--)
         {
-            if(data[j].numDigits()<dig)
+            if(data[j].digits.size()<dig+1)
                 final[--bucket[0]]=data[j];
             else
             {
@@ -58,7 +70,11 @@ void bigNumSort::performSort()
 
             }
         }
-        data=final;
-        dig++;
+        
+        for(int k=0;k<data.size();k++)
+        {
+            data[k]=final[k];
+        }
+        
     }
 }
