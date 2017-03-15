@@ -1,139 +1,144 @@
-diff --git a/bigNumSort.cpp b/bigNumSort.cpp
-index c94e53c..29120fb 100644
---- a/bigNumSort.cpp
-+++ b/bigNumSort.cpp
-@@ -35,7 +35,11 @@ void bigNumSort::performSort()
-         for(int ii=0;ii<data.size();ii++)
-         {
-             if(data[ii].numDigits()<dig)
-+            {
-+                cout<<data[ii].numDigits();
-+                cout<<dig;
-                 bucket[0]++; //eg: 
-+            }
-             else
-             {
-                 bucket[data[ii].digits[dig]]++;
 diff --git a/foo.patch b/foo.patch
-index 03a3aeb..e69de29 100644
+index dae736e..e69de29 100644
 --- a/foo.patch
 +++ b/foo.patch
-@@ -1,118 +0,0 @@
+@@ -1,139 +0,0 @@
+-diff --git a/bigNumSort.cpp b/bigNumSort.cpp
+-index c94e53c..29120fb 100644
+---- a/bigNumSort.cpp
+-+++ b/bigNumSort.cpp
+-@@ -35,7 +35,11 @@ void bigNumSort::performSort()
+-         for(int ii=0;ii<data.size();ii++)
+-         {
+-             if(data[ii].numDigits()<dig)
+-+            {
+-+                cout<<data[ii].numDigits();
+-+                cout<<dig;
+-                 bucket[0]++; //eg: 
+-+            }
+-             else
+-             {
+-                 bucket[data[ii].digits[dig]]++;
 -diff --git a/foo.patch b/foo.patch
--index f9c1c88..e69de29 100644
+-index 03a3aeb..e69de29 100644
 ---- a/foo.patch
 -+++ b/foo.patch
--@@ -1,113 +0,0 @@
+-@@ -1,118 +0,0 @@
 --diff --git a/foo.patch b/foo.patch
---index f818b0b..e69de29 100644
+--index f9c1c88..e69de29 100644
 ----- a/foo.patch
 --+++ b/foo.patch
---@@ -1,108 +0,0 @@
----diff --git a/bigNumSort.cpp b/bigNumSort.cpp
----index 78302de..cb7282d 100644
------- a/bigNumSort.cpp
----+++ b/bigNumSort.cpp
----@@ -38,7 +38,7 @@ void bigNumSort::performSort()
----                 bucket[0]++; //eg: 
----             else
----             {
-----                bucket[data[ii].digits[dig]]++;
----+                bucket[data[ii].numDigits()]++;
----             }
----         }
---- 
----@@ -54,7 +54,7 @@ void bigNumSort::performSort()
----                 final[--bucket[0]]=data[j];
----             else
----             {
-----                final[--bucket[data[j].digits[dig]]]=data[j];
----+                final[--bucket[data[j].numDigits()]=data[j]];
---- 
----             }
----         }
+--@@ -1,113 +0,0 @@
 ---diff --git a/foo.patch b/foo.patch
----index 65ac3e6..e69de29 100644
+---index f818b0b..e69de29 100644
 ------ a/foo.patch
 ---+++ b/foo.patch
----@@ -1,81 +0,0 @@
-----diff --git a/bigNum.h b/bigNum.h
-----index a14f06e..8daab61 100644
-------- a/bigNum.h
-----+++ b/bigNum.h
-----@@ -76,7 +76,7 @@ public:
-----     bigNum& operator*=(const bigNum& multiplicand);
-----     bigNum& operator/=(const bigNum& divisor);
----- 
------protected:
-----+//protected:
-----     vector<int> digits; /** stores the digits of the current number */
----- 
----- private:
+---@@ -1,108 +0,0 @@
 ----diff --git a/bigNumSort.cpp b/bigNumSort.cpp
-----index 1a4f3fc..78302de 100644
+----index 78302de..cb7282d 100644
 ------- a/bigNumSort.cpp
 ----+++ b/bigNumSort.cpp
-----@@ -6,17 +6,59 @@
----- #include "genericSort.h"
----- #include "bigNumSort.h"
----- 
------void bigNumSort::performSort() {
-----+void bigNumSort::performSort() 
-----+{
-----     // A simple implementation of bubble sort
------
-----+    /*
-----     for (int ii=0; ii<data.size(); ii++)
-----         for (int jj=0; jj<data.size(); jj++)
----- 
-----             // compare items at index ii and jj and swap if needed
------            if (!(data[jj] <= data[ii])) {
-----+            if (!(data[jj] <= data[ii])) 
-----+            {
-----                 // swap the two locations
-----                 bigNum temp(this->data[ii]);
-----                 data[ii]=data[jj];
-----                 data[jj]=temp;
+----@@ -38,7 +38,7 @@ void bigNumSort::performSort()
+----                 bucket[0]++; //eg: 
+----             else
+----             {
+-----                bucket[data[ii].digits[dig]]++;
+----+                bucket[data[ii].numDigits()]++;
 ----             }
-----+    */
-----+    int bucket[10];
-----+    vector<bigNum>final(data.size());
-----+    int dig=0;
-----+
-----+    while(true)
-----+    {
-----+
-----+        for(int i=0;i<10;i++)
-----+            bucket[i]=0;
-----+
-----+        for(int ii=0;ii<data.size();ii++)
-----+        {
-----+            if(data[ii].numDigits()<dig)
-----+                bucket[0]++; //eg: 
-----+            else
-----+            {
-----+                bucket[data[ii].digits[dig]]++;
-----+            }
-----+        }
-----+
-----+        if(bucket[0]==data.size())
-----+            break;
-----+
-----+        for (int ii=1; ii<10; ii++)
-----+            bucket[ii] = bucket[ii] + bucket[ii-1];
-----+
-----+        for(int j=data.size()-1;j>=0;j--)
-----+        {
-----+            if(data[j].numDigits()<dig)
-----+                final[--bucket[0]]=data[j];
-----+            else
-----+            {
-----+                final[--bucket[data[j].digits[dig]]]=data[j];
-----+
-----+            }
-----+        }
-----+        data=final;
-----+        dig++;
-----+    }
----- }
-----\ No newline at end of file
+----         }
+---- 
+----@@ -54,7 +54,7 @@ void bigNumSort::performSort()
+----                 final[--bucket[0]]=data[j];
+----             else
+----             {
+-----                final[--bucket[data[j].digits[dig]]]=data[j];
+----+                final[--bucket[data[j].numDigits()]=data[j]];
+---- 
+----             }
+----         }
+----diff --git a/foo.patch b/foo.patch
+----index 65ac3e6..e69de29 100644
+------- a/foo.patch
+----+++ b/foo.patch
+----@@ -1,81 +0,0 @@
+-----diff --git a/bigNum.h b/bigNum.h
+-----index a14f06e..8daab61 100644
+-------- a/bigNum.h
+-----+++ b/bigNum.h
+-----@@ -76,7 +76,7 @@ public:
+-----     bigNum& operator*=(const bigNum& multiplicand);
+-----     bigNum& operator/=(const bigNum& divisor);
+----- 
+------protected:
+-----+//protected:
+-----     vector<int> digits; /** stores the digits of the current number */
+----- 
+----- private:
+-----diff --git a/bigNumSort.cpp b/bigNumSort.cpp
+-----index 1a4f3fc..78302de 100644
+-------- a/bigNumSort.cpp
+-----+++ b/bigNumSort.cpp
+-----@@ -6,17 +6,59 @@
+----- #include "genericSort.h"
+----- #include "bigNumSort.h"
+----- 
+------void bigNumSort::performSort() {
+-----+void bigNumSort::performSort() 
+-----+{
+-----     // A simple implementation of bubble sort
+------
+-----+    /*
+-----     for (int ii=0; ii<data.size(); ii++)
+-----         for (int jj=0; jj<data.size(); jj++)
+----- 
+-----             // compare items at index ii and jj and swap if needed
+------            if (!(data[jj] <= data[ii])) {
+-----+            if (!(data[jj] <= data[ii])) 
+-----+            {
+-----                 // swap the two locations
+-----                 bigNum temp(this->data[ii]);
+-----                 data[ii]=data[jj];
+-----                 data[jj]=temp;
+-----             }
+-----+    */
+-----+    int bucket[10];
+-----+    vector<bigNum>final(data.size());
+-----+    int dig=0;
+-----+
+-----+    while(true)
+-----+    {
+-----+
+-----+        for(int i=0;i<10;i++)
+-----+            bucket[i]=0;
+-----+
+-----+        for(int ii=0;ii<data.size();ii++)
+-----+        {
+-----+            if(data[ii].numDigits()<dig)
+-----+                bucket[0]++; //eg: 
+-----+            else
+-----+            {
+-----+                bucket[data[ii].digits[dig]]++;
+-----+            }
+-----+        }
+-----+
+-----+        if(bucket[0]==data.size())
+-----+            break;
+-----+
+-----+        for (int ii=1; ii<10; ii++)
+-----+            bucket[ii] = bucket[ii] + bucket[ii-1];
+-----+
+-----+        for(int j=data.size()-1;j>=0;j--)
+-----+        {
+-----+            if(data[j].numDigits()<dig)
+-----+                final[--bucket[0]]=data[j];
+-----+            else
+-----+            {
+-----+                final[--bucket[data[j].digits[dig]]]=data[j];
+-----+
+-----+            }
+-----+        }
+-----+        data=final;
+-----+        dig++;
+-----+    }
+----- }
+-----\ No newline at end of file
